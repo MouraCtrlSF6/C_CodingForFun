@@ -1,3 +1,3 @@
-# special-rotary-phone
+# c-programming-projects/exercices
 Initial repository
 
