@@ -49,7 +49,7 @@ int main (void){
 
         printf("Type the column: ");
         scanf("%d", &col);
-            while(col<1 || col>3){
+        while(col<1 || col>3){
             printf("Column value not valid. Please, type again: ");
             scanf("%d", &col);
         }
@@ -62,11 +62,11 @@ int main (void){
         printf("Position already chosen! Type another one.\n");
         Sleep(2000);}
     } system("cls"); 
-    if (table(vet) == 2) printf("\nEnd game! It's a draw.\n\n");
+    if (table(vet) == 2) printf("\nGame over! It's a draw.\n\n");
     else{;
         if(player == 1) player = 0;
         else player = 1;
-        printf("\nEnd game! player %d is the WINNER!", player+1);
+        printf("\nGame over! player %d is the WINNER!", player+1);
         Sleep(500); 
         printf("!");
         Sleep(500);
