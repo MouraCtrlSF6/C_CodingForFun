@@ -63,10 +63,9 @@ int main (void){
         Sleep(2000);}
     } system("cls"); 
     if (table(vet) == 2) printf("\nGame over! It's a draw.\n\n");
-    else{;
+    else{
         if(player == 1) player = 0;
         else player = 1;
-<<<<<<< HEAD
         printf("\n");
         lin = 0;
         while(lin < 5){
@@ -82,12 +81,10 @@ int main (void){
             Sleep(500);
             lin++;
         } printf("\rEnd game! player %d is the WINNER!!!", (player+1));
-=======
         printf("\nGame over! player %d is the WINNER!", player+1);
         Sleep(500); 
         printf("!");
         Sleep(500);
         printf("!");
->>>>>>> b49daf85a60a34047bf49e12906a7b0b63405854
     }
 }   
