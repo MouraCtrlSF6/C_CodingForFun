@@ -13,7 +13,7 @@ int table(char *p){
         if (*(p+i) != 'X' && *(p+i) != 'O') break;
         if(i == 8) game = 2;
     }
-    for (int i = 0; i<2; i++){
+    for (int i = 0; i<3; i++){
         if (*(p+i) == *(p+i+3) && *(p+i) == *(p+i+6) && *(p+i) != NULL){
             game = 0;
             break;
@@ -66,10 +66,20 @@ int main (void){
     else{;
         if(player == 1) player = 0;
         else player = 1;
-        printf("\nEnd game! player %d is the WINNER!", player+1);
-        Sleep(500); 
-        printf("!");
-        Sleep(500);
-        printf("!");
+        printf("\n");
+        lin = 0;
+        while(lin < 5){
+            printf("\rGame over! player %d is the          ", (player+1));
+            Sleep(100);
+            printf("\rGame over! player %d is the WINNER", (player+1));
+            Sleep(200);
+            printf("!");
+            Sleep(200);
+            printf("!");
+            Sleep(200);
+            printf("!");
+            Sleep(500);
+            lin++;
+        } printf("\rEnd game! player %d is the WINNER!!!", (player+1));
     }
 }   
