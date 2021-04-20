@@ -80,7 +80,7 @@ int main (void){
             printf("!");
             Sleep(500);
             lin++;
-        } printf("\rEnd game! player %d is the WINNER!!!", (player+1));
+        } printf("\rGame over! player %d is the WINNER!!!", (player+1));
         printf("\nGame over! player %d is the WINNER!", player+1);
         Sleep(500); 
         printf("!");
