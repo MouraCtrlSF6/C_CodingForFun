@@ -16,5 +16,4 @@ main()
     }
     for(i = 0; i < num; i++)
         printf("%d ", *(arr + i));
-    return 0;
 }
