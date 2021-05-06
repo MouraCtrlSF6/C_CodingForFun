@@ -20,12 +20,10 @@ struct wav{
     char SubChunk2ID[4];
     int SubChunk2Size;
     char Data[200000000];
-    }header;
+}header;
 
-
-void lista(void)
-{
-    printf("----------M�SICAS DISPON�VEIS----------");
+void lista(void){
+    printf("----------MÚSICAS DISPONÍVEIS----------");
     printf("\n1.    Bad Girlfriend");
     printf("\n2.    Birds");
     printf("\n3.    Come Together");
@@ -34,16 +32,14 @@ void lista(void)
     printf("\n6.    Valse Hot");
 }
 
-int amplificacao(char nome[50])
-{
+int amplificacao(char nome[50]){
     char amplificado[50];
     int contador,multiplicador;
     FILE *fp,*am;
     strcat(nome,".wav");
     fp=fopen(nome,"rb");
-    if(fp==NULL)
-    {
-        printf("\nArquivo n�o existente. ");
+    if(fp==NULL){
+        printf("\nArquivo não existente. ");
         return 0;
     }
     printf("\nQual o nome do novo arquivo? ");
@@ -54,12 +50,9 @@ int amplificacao(char nome[50])
     printf("\nQuantas vezes deseja amplificar? ");
     scanf("%d",&multiplicador);
     fread(&header,sizeof(header),1,fp);
-    for(contador=0;contador<header.ChunkSize+8;contador++)
-    {
-        if(header.Data[contador]<0xff)
-            header.Data[contador] = header.Data[contador]*multiplicador;
-        if(header.Data[contador]>0xff)
-            header.Data[contador] = 0xff;
+    for(contador=0;contador<header.ChunkSize+8;contador++){
+        if(header.Data[contador]<0xff) header.Data[contador] = header.Data[contador]*multiplicador;
+        if(header.Data[contador]>0xff) header.Data[contador] = 0xff;
     }
     fwrite(&header,header.ChunkSize+8,1,am);
     printf("\nPRONTO!");
@@ -67,16 +60,14 @@ int amplificacao(char nome[50])
     fclose(am);
 }
 
-int corte (char nome[50])
-{
+int corte (char nome[50]){
     char arquivo[50];
     int end,start,tempo,inicio,play,cortar;
     FILE *ar,*ptr;
     strcat(nome,".wav");
     ptr = fopen(nome,"rb");
-    if(ptr==NULL)
-    {
-        printf("\nArquivo n�o existente. ");
+    if(ptr==NULL){
+        printf("\nArquivo não existente. ");
         return 0;
     }
     puts("\nDigite o nome do arquivo cortado: ");
@@ -87,19 +78,17 @@ int corte (char nome[50])
     fread(&header,sizeof(header),1,ptr);
     tempo = (header.ChunkSize)/(header.ByteRate);
 
-    printf("\nA m�sica tem %d segundos.",tempo);
+    printf("\nA música tem %d segundos.",tempo);
     printf("\nInicio da faixa: ");
     scanf("%d",&start);
-    while(start<0)
-    {
-        printf("\nN�o dispon�vel. Por favor, selecione novamente: ");
+    while(start<0){
+        printf("\nNão disponível. Por favor, selecione novamente: ");
         scanf("%d",&start);
     }
     printf("\nFim da faixa: ");
     scanf("%d",&end);
-    while(start>end||end>tempo)
-    {
-        printf("\nN�o dispon�vel. Por favor, selecione novamente: ");
+    while(start>end||end>tempo){
+        printf("\nNão disponvel. Por favor, selecione novamente: ");
         scanf("%d",&end);
     }
     cortar = tempo-(end-start);
@@ -123,17 +112,14 @@ int corte (char nome[50])
     fclose(ar);
 }
 
-int informacoes (char nome[50])
-{
-
+int informacoes (char nome[50]){
     FILE *fp;
     setlocale(LC_ALL, "Portuguese");
     strcat(nome,".wav");
     fp = fopen(nome,"rb");
 
-    if(fp==NULL)
-    {
-        printf("\nArquivo n�o existente. ");
+    if(fp==NULL){
+        printf("\nArquivo não existente. ");
         return 0;
     }
     fread(&header,sizeof(header),1,fp);
@@ -153,54 +139,48 @@ int informacoes (char nome[50])
     printf("\nSubChunk2Size=%i",header.SubChunk2Size);
 }
 
-int reproducao(char play[50])
-{
+int reproducao(char play[50]){
     FILE *fp;
     int fim;
     strcat(play,".wav");
     fp = fopen(play,"rb");
-    if(fp==NULL)
-    {
-        printf("\nArquivo n�o existente. ");
+    if(fp==NULL){
+        printf("\nArquivo não existente. ");
         return 0;
     }
     printf("\n\n-------ENJOY THE MUSIC-------\n\n");
     printf("\n\nPressione qualquer tecla para sair.\n");
-        PlaySound(TEXT(play),NULL,SND_ASYNC);
+    PlaySound(TEXT(play),NULL,SND_ASYNC);
         
-        getch();
-        PlaySound(NULL,NULL,NULL);
+    getch();
+    PlaySound(NULL,NULL,NULL);
 }
 
-int main ()
-{
+int main (void){
     int selecao, again;
     char musica[50];
     setlocale(LC_ALL, "Portuguese");
-    while(1)
-    {
+    while(1){
         system("cls");
-        printf("1. Exibir cabe�alho;");
+        printf("1. Exibir cabeçalho;");
         printf("\n2. Reproduzir faixa;");
         printf("\n3. Cortar faixa;");
         printf("\n4. Amplificar;");
-        printf("\n5. M�sicas dispon�veis;");
+        printf("\n5. Músicas disponíveis;");
         printf("\n6. Sair.");
-        printf("\n\nOl�, digite fun��o que deseja fazer: ");
+        printf("\n\nOlá, digite função que deseja fazer: ");
         scanf("%d",&selecao);
         fflush(stdin);
-        while(selecao<1||selecao>5)
-        {
-            printf("Comando nao dispon�vel. Por favor, digite um comando v�lido.\n");
-            printf("\n1. Exibir informa��es;");
+        while(selecao<1||selecao>5){
+            printf("Comando nao disponível. Por favor, digite um comando válido.\n");
+            printf("\n1. Exibir informações;");
             printf("\n2. Reproduzir faixa;");
-            printf("\nOl�, digite fun��o que deseja fazer: ");
+            printf("\nOlá, digite função que deseja fazer: ");
             scanf("%d",&selecao);
             fflush(stdin);
         }
-        if(selecao==1)
-        {
-            printf("Digite o nome da m�sica: ");
+        if(selecao==1){
+            printf("Digite o nome da música: ");
             gets(musica);
             printf("\nCarregando.");
             Sleep(500);
@@ -212,21 +192,18 @@ int main ()
             informacoes(musica);
             printf("\n\n\n");
             printf("1. Sim");
-            printf("\n2. N�o\n");
+            printf("\n2. Não\n");
             printf("Deseja fazer mais alguma coisa? ");
             scanf("%d",&again);
-            while(again<1||again>2)
-            {
-                printf("Comando inv�lido. Por favor, tente novamente: ");
+            while(again<1||again>2){
+                printf("Comando inválido. Por favor, tente novamente: ");
                 scanf("%d",&again);
             }
-            if(again==2)
-                break;
+            if(again==2) break;
         }
 
-        if(selecao==2)
-        {
-            printf("Digite o nome da m�sica: ");
+        if(selecao==2){
+            printf("Digite o nome da música: ");
             gets(musica);
             printf("\nCarregando.");
             Sleep(500);
@@ -238,20 +215,17 @@ int main ()
             reproducao(musica);
             printf("\n\n\n");
             printf("1. Sim");
-            printf("\n2. N�o\n");
+            printf("\n2. Não\n");
             printf("Deseja fazer mais alguma coisa? ");
             scanf("%d",&again);
-            while(again<1||again>2)
-            {
-                printf("Comando inv�lido. Por favor, tente novamente: ");
+            while(again<1||again>2){
+                printf("Comando inválido. Por favor, tente novamente: ");
                 scanf("%d",&again);
             }
-            if(again==2)
-                break;
+            if(again==2) break;
         }
-        if(selecao==3)
-        {
-            printf("Digite o nome da m�sica: ");
+        if(selecao==3){
+            printf("Digite o nome da música: ");
             gets(musica);
             printf("\nCarregando.");
             Sleep(500);
@@ -262,20 +236,17 @@ int main ()
             corte(musica);
             printf("\n\n\n");
             printf("1. Sim");
-            printf("\n2. N�o\n");
+            printf("\n2. Não\n");
             printf("Deseja fazer mais alguma coisa? ");
             scanf("%d",&again);
-            while(again<1||again>2)
-            {
-                printf("Comando inv�lido. Por favor, tente novamente: ");
+            while(again<1||again>2){
+                printf("Comando inválido. Por favor, tente novamente: ");
                 scanf("%d",&again);
             }
-            if(again==2)
-                break;
+            if(again==2) break;
         }
-        if(selecao==4)
-        {
-            printf("Digite o nome da m�sica: ");
+        if(selecao==4){
+            printf("Digite o nome da música: ");
             gets(musica);
             printf("\nCarregando.");
             Sleep(500);
@@ -286,19 +257,16 @@ int main ()
             amplificacao(musica);
             printf("\n\n\n");
             printf("1. Sim");
-            printf("\n2. N�o\n");
+            printf("\n2. Não\n");
             printf("Deseja fazer mais alguma coisa? ");
             scanf("%d",&again);
-            while(again<1||again>2)
-            {
-                printf("Comando inv�lido. Por favor, tente novamente: ");
+            while(again<1||again>2){
+                printf("Comando inválido. Por favor, tente novamente: ");
                 scanf("%d",&again);
             }
-            if(again==2)
-                break;
+            if(again==2) break;
         }
-        if(selecao==5)
-        {
+        if(selecao==5){
             printf("\nCarregando.");
             Sleep(500);
             printf(".");
@@ -308,19 +276,16 @@ int main ()
             lista();
             printf("\n\n\n");
             printf("1. Sim");
-            printf("\n2. N�o\n");
+            printf("\n2. Não\n");
             printf("Deseja fazer mais alguma coisa? ");
             scanf("%d",&again);
-            while(again<1||again>2)
-            {
-                printf("Comando inv�lido. Por favor, tente novamente: ");
+            while(again<1||again>2){
+                printf("Comando inválido. Por favor, tente novamente: ");
                 scanf("%d",&again);
             }
-            if(again==2)
-                break;
+            if(again==2) break;
         }
-    if(selecao==6)
-        return 0;
+    if(selecao==6) return 0;
     }
     system("pause");
 }
