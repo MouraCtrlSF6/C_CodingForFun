@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-
+//Note that the alphabet has 26 letters, than "n" and "m" are the middle ones
 int main (void){
     char word[40]={};
     int newLetter, i;
@@ -12,7 +12,7 @@ int main (void){
     gets(word);
     for(i=0; i<sizeof(word); i++){
         if(word[i]!=NULL){
-            if(('a'>word[i] || word[i]>'z')&&('A'>word[i] || word[i]>'Z')){
+            if(('a'>word[i] || word[i]>'z')&&('A'>word[i] || word[i]>'Z')&&!word[i] == ' '){
                 printf("Input %s not valid. Please, type a word: ", word);
                 for (i=0; i<sizeof(word); i++){
                     word[i] = NULL;
@@ -24,14 +24,12 @@ int main (void){
     }
     printf("Resulting word: ");
     for(i=0; i<sizeof(word); i++){
-        if('a'<=word[i] && word[i]<='z'){
-            newLetter = 'n' - word[i];
-            newLetter = 'n' + newLetter - 1;
+        if('a'<=word[i] && word[i]<='z'){ 
+            newLetter = 2*('n') - word[i] - 1;
             word[i] = newLetter;
         }
         if('A'<=word[i] && word[i]<='Z'){
-            newLetter = 'N' - word[i];
-            newLetter = 'N' + newLetter - 1;
+            newLetter = 2*('N') - word[i] - 1;
             word[i] = newLetter;
         }
         printf("%c", word[i]);
