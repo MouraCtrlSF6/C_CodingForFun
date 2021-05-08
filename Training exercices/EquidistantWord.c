@@ -13,7 +13,10 @@ int main (void){
     for(i=0; i<sizeof(word); i++){
         if(word[i]!=NULL){
             if(('a'>word[i] || word[i]>'z')&&('A'>word[i] || word[i]>'Z')){
-                printf("Input not valid. Please, type a word: ");
+                printf("Input %s not valid. Please, type a word: ", word);
+                for (i=0; i<sizeof(word); i++){
+                    word[i] = NULL;
+                }
                 gets(word);
                 i=0;
             }
