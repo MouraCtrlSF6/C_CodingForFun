@@ -1,9 +1,9 @@
-#include<stdlib.h>
-#include<stdio.h>
-#include<windows.h>
-#include<stdint-gcc.h>
-#include<locale.h>
-#include<conio.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <windows.h>
+#include <stdint-gcc.h>
+#include <locale.h>
+#include <conio.h>
 
 struct wav{
     char ChunkID[4];
